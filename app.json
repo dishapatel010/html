@@ -1,4 +1,25 @@
 {
-  "name": "HTML",
-  "repository": "https://github.com/dishapatel010/html"
+   "name":"TOUKA19",
+   "description":"MKAE YOUR OWN WEB",
+   "logo":"https://i.imgur.com/bdgegfef.png",
+   "keywords":[
+      "WEBSITE",
+      "FUN",
+      "HEROKU",
+      "enjoy"
+   ],
+   "repository":"https://github.com/dishapatel010/html",
+   "website":"https://github.com/dishapatel010/html",
+   "success_url":"https://github.com/dishapatel010/html",
+   "buildpacks":[
+      {
+         "url":"heroku/php"
+      }
+   ],
+   "formation":{
+      "web":{
+         "quantity":1,
+         "size":"free"
+      }
+   }
 }
