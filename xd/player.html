@@ -1,0 +1,57 @@
+© 2021 TOUKA19
+
+<html>
+
+<head>
+    <title>Plyr Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel='stylesheet' href='https://cdn.plyr.io/3.6.2/plyr.css'>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
+</head>
+<style>
+    html {
+        font-family: Poppins;
+        background: #000;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body><video controls crossorigin
+        poster="https://telegra.ph/file/d13184e5038c5c273aef5.jpg"
+        playsinline>
+        <source type="application/x-mpegURL" src="{{play_url}}">
+    </video></body>
+<script>document.addEventListener('DOMContentLoaded', () => {
+ const source = 'https://raw.githubusercontent.com/dishapatel010/hlsflow/main/big-buck-bunny/master.m3u8';
+ const video = document.querySelector('video');
+ 
+ // For more options see: https://github.com/sampotts/plyr/#options
+ // captions.update is required for captions to work with hls.js
+ const player = new Plyr(video, {captions: {active: true, update: true, language: 'en'}});
+ 
+ if (!Hls.isSupported()) {
+  video.src = source;
+ } else {
+  // For more Hls.js options, see https://github.com/dailymotion/hls.js
+  const hls = new Hls();
+  hls.loadSource(source);
+  hls.attachMedia(video);
+  window.hls = hls;
+  
+  // Handle changing captions
+  player.on('languagechange', () => {
+   // Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
+   setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+  });
+ }
+ 
+ // Expose player so it can be used from the console
+ window.player = player;
+});</script>
+
+</html>
